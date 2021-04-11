@@ -1,0 +1,12 @@
+C:\PROJET\TreasureHunt\Models\bin\Debug\netcoreapp3.1\Models.deps.json
+C:\PROJET\TreasureHunt\Models\bin\Debug\netcoreapp3.1\Models.dll
+C:\PROJET\TreasureHunt\Models\bin\Debug\netcoreapp3.1\Models.pdb
+C:\PROJET\TreasureHunt\Models\bin\Debug\netcoreapp3.1\Common.dll
+C:\PROJET\TreasureHunt\Models\bin\Debug\netcoreapp3.1\Common.pdb
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfoInputs.cache
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfo.cs
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.csproj.CopyComplete
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.dll
+C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.pdb
