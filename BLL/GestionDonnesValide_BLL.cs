@@ -9,10 +9,16 @@ namespace BLL
 {
     public interface IGestionDonnesValide_BLL
     {
-        Task<bool> DonnesValide(string sDonnes, DonnesType eDonnesType) 
+        Task<bool> DonnesValide(string sDonnes, DonnesType eDonnesType);
     }
     public class GestionDonnesValide_BLL : IGestionDonnesValide_BLL
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sDonnes"></param>
+        /// <param name="eDonnesType"></param>
+        /// <returns></returns>
         public async Task<bool> DonnesValide(string sDonnes, DonnesType eDonnesType)
         {
             bool bEstValide = false;

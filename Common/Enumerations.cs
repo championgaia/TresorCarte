@@ -8,15 +8,36 @@ namespace Common
     {
         public enum Orientation
         {
-            Nord = 0,
-            Sud = 1,
-            Ouest = 2,
-            Est = 3
+            /// <summary>
+            /// Nord
+            /// </summary>
+            N = 0,
+            /// <summary>
+            /// Sud
+            /// </summary>
+            S = 1,
+            /// <summary>
+            /// Ouest
+            /// </summary>
+            O = 2,
+            /// <summary>
+            /// Est
+            /// </summary>
+            E = 3
         }
         public enum Mouvement
         {
+            /// <summary>
+            /// Avancer
+            /// </summary>
             A = 0,
+            /// <summary>
+            /// tourner à gauche
+            /// </summary>
             G = 1,
+            /// <summary>
+            /// Tourner à droite
+            /// </summary>
             D = 2
         }
         public enum CaseType

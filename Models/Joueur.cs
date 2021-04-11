@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using static Common.Enumerations;
@@ -19,6 +20,11 @@ namespace Models
             CurrentOrientation = eOrientation;
             SequenceMovement = oSequence;
             OrderDeJouer = iOrderDeJouer;
+        }
+        public override string ToString()
+        {
+            return Constants.ABREVIATION_JOUEUR + Constants.SEPERATEUR + Nom + Constants.SEPERATEUR + JoueurPosition?.AxeHorizontal + Constants.SEPERATEUR + JoueurPosition?.AxeVertical + 
+                Constants.SEPERATEUR + CurrentOrientation.ToString() + Constants.SEPERATEUR + NombreTresorTrouve;
         }
     }
 }

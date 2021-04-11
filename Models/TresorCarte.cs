@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,6 +14,10 @@ namespace Models
         {
             NombreCaseLargeur = iNombreCaseLargeur;
             NombreCaseHauteur = iNombreCaseHauteur;
+        }
+        public override string ToString()
+        {
+            return Constants.ABREVIATION_CARTE + Constants.SEPERATEUR + NombreCaseLargeur + Constants.SEPERATEUR + NombreCaseHauteur;
         }
     }
 }

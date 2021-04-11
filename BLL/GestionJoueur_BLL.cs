@@ -19,13 +19,18 @@ namespace BLL
         {
             _oIGestionDonnesValide_BLL = oIGestionDonnesValide_BLL;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oListDescriptionFichier"></param>
+        /// <returns></returns>
         public async Task<List<Joueur>> CreateListeJoueur(List<string> oListDescriptionFichier)
         {
             List<Joueur> oListeJoueur = null;
             if (oListDescriptionFichier != null && oListDescriptionFichier.Count > 0)
             {
                 List<string> oListInfoJoueur = oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_JOUEUR));
-                if(oListInfoJoueur != null && oListInfoJoueur.Count > 0)
+                if (oListInfoJoueur != null && oListInfoJoueur.Count > 0)
                 {
                     oListeJoueur = new List<Joueur>();
                     foreach (var oInfoJoueur in oListInfoJoueur)
@@ -40,21 +45,22 @@ namespace BLL
             }
             return oListeJoueur;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oInfoJoueur"></param>
+        /// <param name="iIndexInfoJoueur"></param>
+        /// <returns></returns>
         private async Task<Joueur> CreateUnJoueur(string oInfoJoueur, int iIndexInfoJoueur)
         {
             Joueur oJoueur = null;
-            if (!string.IsNullOrEmpty(oInfoJoueur) && oInfoJoueur.Contains(Constants.SEPERATEUR))
+            if (await _oIGestionDonnesValide_BLL.DonnesValide(oInfoJoueur, DonnesType.Joueur))
             {
                 string[] oArrayDonnesJoueur = oInfoJoueur.Split(Constants.SEPERATEUR);
-                if (oArrayDonnesJoueur.Length >= 6 && int.TryParse(oArrayDonnesJoueur[2], out int iAxeHorizotal) 
-                    && int.TryParse(oArrayDonnesJoueur[3], out int iAxeVertical))
+                oJoueur = new Joueur(oArrayDonnesJoueur[1], (Orientation)Enum.Parse(typeof(Orientation), oArrayDonnesJoueur[4]), oArrayDonnesJoueur[5].ToCharArray(), iIndexInfoJoueur + 1)
                 {
-                    oJoueur = new Joueur(oArrayDonnesJoueur[1], (Orientation)Enum.Parse(typeof(Orientation), oArrayDonnesJoueur[4]), oArrayDonnesJoueur[5].ToCharArray(), iIndexInfoJoueur + 1)
-                    {
-                        JoueurPosition = new Position(iAxeHorizotal, iAxeVertical)
-                    };
-                }
+                    JoueurPosition = new Position(int.Parse(oArrayDonnesJoueur[2]), int.Parse(oArrayDonnesJoueur[3]))
+                };
             }
             return oJoueur;
         }

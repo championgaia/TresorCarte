@@ -26,7 +26,6 @@ C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.TagHelpers.input.cache
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.TagHelpers.output.cache
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.RazorCoreGenerate.cache
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -41,3 +40,8 @@ C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\staticwebassets\UIL.StaticWeb
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.dll
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.pdb
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\UIL.genruntimeconfig.cache
+C:\PROJET\TreasureHunt\UIL\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\PROJET\TreasureHunt\UIL\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\PROJET\TreasureHunt\UIL\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+C:\PROJET\TreasureHunt\UIL\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs

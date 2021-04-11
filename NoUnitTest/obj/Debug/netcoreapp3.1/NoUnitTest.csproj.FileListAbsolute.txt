@@ -100,3 +100,7 @@ C:\PROJET\TreasureHunt\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.csproj.Copy
 C:\PROJET\TreasureHunt\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.dll
 C:\PROJET\TreasureHunt\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.pdb
 C:\PROJET\TreasureHunt\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.genruntimeconfig.cache
+C:\PROJET\TreasureHunt\NoUnitTest\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\PROJET\TreasureHunt\NoUnitTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\PROJET\TreasureHunt\NoUnitTest\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+C:\PROJET\TreasureHunt\NoUnitTest\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "DsPbM2WFHxaSm8ySpCAf0UlC29h4zrsaC7ku9Yk+JOyn0k5DI/Pc3qiTmYjJ2bLC+IxhYC6hrmBp1fH9L3Mx1Q==",
+  "dgSpecHash": "xsrafSnWihLZ8XhLU45LASg89LFcYUWOQ8WRsgDm0d9Um+MNh+GMMPYJfStkSBoKOrZ/HblUVlKTcq7auOh8Bw==",
   "success": true,
   "projectFilePath": "C:\\PROJET\\TreasureHunt\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\vhn\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.5\\microsoft.aspnetcore.http.features.5.0.5.nupkg.sha512",
+    "C:\\Users\\vhn\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.1\\microsoft.extensions.primitives.5.0.1.nupkg.sha512",
+    "C:\\Users\\vhn\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
+    "C:\\Users\\vhn\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

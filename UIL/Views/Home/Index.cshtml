@@ -1,8 +1,40 @@
-﻿@{
+﻿@using Models;
+@model SimmulationJeu
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+<form method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <div id="divWaiting" style="display:none">
+                <img src="~/images/waiting image.gif" />
+            </div>
+        </div>
+    </div>
+    <div>
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="@Model.MyFileUpload" class="control-label"></label>
+                    <input asp-for="@Model.MyFileUpload" class="form-control" type="file" />
+                    <span asp-validation-for="@Model.MyFileUpload" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" value="Lancer simulation" class="btn btn-primary" id="btnLancer" asp-action="Post" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div>
+    @ViewBag.TotalStudents
 </div>
