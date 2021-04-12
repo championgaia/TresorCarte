@@ -13,6 +13,7 @@ namespace BLL
     {
         Task<string> ExecuterJeu(List<string> oListDescriptionFichier);
         Task<string> TerminerJeu();
+        Task SetJeu(Jeu oJeu);
     }
     public class GestionDerouleJeu_BLL : IGestionDerouleJeu_BLL
     {
@@ -28,6 +29,7 @@ namespace BLL
             _oIDeplacerJoueur_BLL = oIDeplacerJoueur_BLL;
             _oIGestionFichier_BLL = oIGestionFichier_BLL;
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -109,6 +111,15 @@ namespace BLL
         public async Task<string> TerminerJeu()
         {
             return await _oIGestionFichier_BLL.Ecriture(Guid.NewGuid().ToString() + Constants.EXTENSION_TEXTE, CurrentJeu);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="oJeu"></param>
+        /// <returns></returns>
+        public async Task SetJeu(Jeu oJeu)
+        {
+            CurrentJeu = oJeu;
         }
     }
 }

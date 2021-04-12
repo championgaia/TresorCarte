@@ -2,6 +2,7 @@
 using Common;
 using Models;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace NoUnitTest
         {
             _oIGestionFichier_BLL = new GestionFichier_BLL();
         }
-        /// <summary>
+        /// <summary
         /// Test Lecture return null
         /// Task<List<string>> Lecture(string sFileName)
         /// </summary>
@@ -25,11 +26,9 @@ namespace NoUnitTest
         public async Task Lecture_TestNull()
         {
             //Test sFileName = null
-            List<string> oListeDonnes = await _oIGestionFichier_BLL.Lecture(null);
-            Assert.IsNull(oListeDonnes);
+            Assert.IsNull(await _oIGestionFichier_BLL.Lecture(null));
             //Test sFileName est une chaine vide
-            oListeDonnes = await _oIGestionFichier_BLL.Lecture(string.Empty);
-            Assert.IsNull(oListeDonnes);
+            Assert.IsNull(await _oIGestionFichier_BLL.Lecture(string.Empty));
         }
         /// <summary>
         /// Test validation donnees
@@ -66,6 +65,20 @@ namespace NoUnitTest
             Assert.IsNotEmpty(oListeDescriptionFichier);
             Assert.IsTrue(!sMessageErreur.Contains(Constants.DONNES_CARTE_INVALIDE) && !sMessageErreur.Contains(Constants.DONNES_JOUEUR_INVALIDE) &&
                 !sMessageErreur.Contains(Constants.DONNES_TRESOR_INVALIDE));
+        }
+        /// <summary
+        /// Test Ecriture return null
+        /// Task<string> Ecriture(string sFileName, Jeu oCurrentJeu)
+        /// </summary>
+        [Test]
+        public async Task Ecriture_TestNull()
+        {
+            //Test sFileName = null
+            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(null, new Jeu()));
+            //Test sFileName est une chaine vide
+            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(string.Empty, new Jeu()));
+            //Test oCurrentJeu = null
+            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(Guid.NewGuid().ToString(), null));
         }
     }
 }

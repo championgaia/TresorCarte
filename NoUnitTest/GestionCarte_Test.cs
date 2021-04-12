@@ -43,14 +43,12 @@ namespace NoUnitTest
         public async Task CreateCarteTresor_TestNull()
         {
             // Test oListDescriptionFichier = null
-            TresorCarte oTresorCarte = await _oIGestionCarte_BLL.CreateCarteTresor(null);
-            Assert.IsNull(oTresorCarte);
+            Assert.IsNull(await _oIGestionCarte_BLL.CreateCarteTresor(null));
             // Test oListDescriptionFichier est une collection vide
-            oTresorCarte = await _oIGestionCarte_BLL.CreateCarteTresor(new List<string>());
-            Assert.IsNull(oTresorCarte);
+            Assert.IsNull(await _oIGestionCarte_BLL.CreateCarteTresor(new List<string>()));
             // Test oListDescriptionFichier contient pas info de la carte
             Lists_Donnes_Valide.RemoveAt(Lists_Donnes_Valide.IndexOf(DONNES_CATRE_VALIDE));
-            oTresorCarte = await _oIGestionCarte_BLL.CreateCarteTresor(Lists_Donnes_Valide);
+            TresorCarte oTresorCarte = await _oIGestionCarte_BLL.CreateCarteTresor(Lists_Donnes_Valide);
             Assert.IsNull(oTresorCarte);
             // Test oListDescriptionFichier contient pas info de la carte
             Lists_Donnes_Valide.Add(DONNES_CATRE_NON_VALIDE);
