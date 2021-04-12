@@ -12,14 +12,6 @@ namespace NoUnitTest
     public class GestionFichier_Test : NoUnitTestBase
     {
         private IGestionFichier_BLL _oIGestionFichier_BLL { get; set; }
-        #region constant
-        private const string REPERTOIRE_FICHIER = @"..\..\..\FichierTests";
-        private const string FICHIER_OK= "tresor_carte.txt";
-        private const string FICHIER_VIDE = "tresor_carte_vide.txt";
-        private const string FICHIER_SANS_INFO_MAP = "tresor_carte_sans_info_carte.txt";
-        private const string FICHIER_SANS_TRESOR = "tresor_carte_sans_tresor.txt";
-        private const string FICHIER_SANS_JOUEUR = "tresor_carte_sans_joueur.txt";
-        #endregion
         [SetUp]
         public void Setup()
         {

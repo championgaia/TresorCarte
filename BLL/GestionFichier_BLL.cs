@@ -64,14 +64,6 @@ namespace BLL
                         }
                     }
                 }
-                else
-                {
-
-                }
-            }
-            else
-            {
-
             }
             return oListDescriptionFichier;
         }
@@ -161,7 +153,11 @@ namespace BLL
             }
             return (bEstValide, sMessageErreur, oListeDonnes);
         }
-
+        /// <summary>
+        /// lecture le fichier en memoire
+        /// </summary>
+        /// <param name="sFileName"></param>
+        /// <returns></returns>
         public async Task<MemoryStream> CreateStreamDownload(string sFileName)
         {;
             FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.DOSSIER_TEMPS, sFileName));

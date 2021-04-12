@@ -8,4 +8,6 @@ T - 0 - 3 - 2
 T - 1 - 3 - 3
 # {A comme Aventurier} - {Nom de l’aventurier} - {Axe horizontal} - {Axe vertical} - {Orientation} - {Séquence de mouvement}
 A - Lara - 1 - 1 - S - AADADAGGA
-A - Sandra - 2 - 2 - N - AADADAGGA
+A - Sandra - 2 - 2 - N - AAGAGADDA
+A - Indianna - 1 - 1 - O - AADADAGGA
+A - Kara - 2 - 3 - O - AADADAGGA

@@ -36,9 +36,9 @@ namespace BLL
         public async Task<string> ExecuterJeu(List<string> oListDescriptionFichier)
         {
             await InitiationJeu(oListDescriptionFichier);
-            if (CurrentJeu != null)
+            if (CurrentJeu != null && CurrentJeu.NombreDeplacementMax > 0)
             {
-                for (int iTour = 1; iTour <= CurrentJeu.NombreDeplacementMax; iTour++)
+                for (int iTour = 1; iTour < CurrentJeu.NombreDeplacementMax; iTour++)
                 {
                     await JouerUnTout(iTour);
                 }
@@ -60,7 +60,7 @@ namespace BLL
                     Carte = await _oIGestionCarte_BLL.CreateCarteTresor(oListDescriptionFichier),
                     Joueurs = await _oIGestionJoueur_BLL.CreateListeJoueur(oListDescriptionFichier)
                 };
-                CurrentJeu.NombreDeplacementMax = CurrentJeu.Joueurs.Max(j => j.SequenceMovement.Length) - 1;
+                CurrentJeu.NombreDeplacementMax = CurrentJeu.Joueurs.Max(j => j.SequenceMovement.Length);
             }
 
         }
@@ -77,18 +77,19 @@ namespace BLL
                 Position oAncientPosition = oCurrentJoueur.JoueurPosition;
                 if (oCurrentJoueur.SequenceMovement.Length >= iTour)
                 {
-                    (Position oNouveauPosition, Orientation eNextOrientation)  = await _oIDeplacerJoueur_BLL.GetNextPositionJoueur(oCurrentJoueur, iTour);
-                    if (await _oIGestionCarte_BLL.GetValidePosition(CurrentJeu.Carte, oNouveauPosition) && oNouveauPosition.CompareTo(oAncientPosition) == 0)
+                    //chercher la nouvelle prosition et prochaine orientation
+                    (Position oNouvellePosition, Orientation eNextOrientation)  = await _oIDeplacerJoueur_BLL.GetNextPositionJoueur(oCurrentJoueur, iTour);
+                    if (oNouvellePosition.CompareTo(oAncientPosition) == 0 && await _oIGestionCarte_BLL.GetValidePosition(CurrentJeu.Carte, oNouvellePosition))
                     {
                         //joueur a déplacé
                         //liberer le case de départ
                         CaseCarte oAncientCase = CurrentJeu.Carte.ListeCase.FirstOrDefault(c => oAncientPosition.CompareTo(c.CasePosition) == 1);
                         oAncientCase.EstOccupe = false;
                         //occuper le case d'arrive
-                        CaseCarte oNouveauCase = CurrentJeu.Carte.ListeCase.FirstOrDefault(c => oNouveauPosition.CompareTo(c.CasePosition) == 1);
+                        CaseCarte oNouveauCase = CurrentJeu.Carte.ListeCase.FirstOrDefault(c => oNouvellePosition.CompareTo(c.CasePosition) == 1);
                         oNouveauCase.EstOccupe = true;
                         //changer position du current joueur
-                        oCurrentJoueur.JoueurPosition = oNouveauPosition;
+                        oCurrentJoueur.JoueurPosition = oNouvellePosition;
                         //recuperer trésor s'il y en a, et décompte le nombre de trésor
                         if (oNouveauCase.Type == CaseType.Tresor && oNouveauCase.NombreTresor > 0)
                         {
@@ -96,6 +97,7 @@ namespace BLL
                             oNouveauCase.NombreTresor--;
                         }
                     }
+                    //set prochaine orientation pour le joueur
                     oCurrentJoueur.CurrentOrientation = eNextOrientation;
                 }
             }
