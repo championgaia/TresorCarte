@@ -20,7 +20,7 @@ namespace BLL
             _oIGestionDonnesValide_BLL = oIGestionDonnesValide_BLL;
         }
         /// <summary>
-        /// 
+        /// Créer les joueurs
         /// </summary>
         /// <param name="oListDescriptionFichier"></param>
         /// <returns></returns>
@@ -46,7 +46,7 @@ namespace BLL
             return oListeJoueur;
         }
         /// <summary>
-        /// 
+        /// Créer un joueur avec des infos
         /// </summary>
         /// <param name="oInfoJoueur"></param>
         /// <param name="iIndexInfoJoueur"></param>

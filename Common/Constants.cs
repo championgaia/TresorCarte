@@ -29,5 +29,11 @@ namespace Common
         public const string DONNES_JOUEUR_INVALIDE = @"- Le fichier ne contient aucune ligne Aventurier ";
 
         public const string TEXT_XML = "text/xml";
+        public const string EXTENSION_TEXTE = ".txt";
+
+        public const string SAUT_LIGNE_HTML = @"<br />";
+
+        public const string NOM_FICHIER_EMPTY = "nom du fichier est vide";
+        public const string FICHIER_NON_TROUVE = "fichier non trouvé";
     }
 }

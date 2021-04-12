@@ -30,6 +30,7 @@ namespace UIL.Controllers
             SimmulationJeu oSimmulationJeu = new SimmulationJeu();
             return View(oSimmulationJeu);
         }
+
         [HttpPost]
         public async Task<IActionResult> Post(SimmulationJeu oSimmulationJeu)
         {
@@ -57,6 +58,7 @@ namespace UIL.Controllers
                 return View("Index", oSimmulationJeu);
             }
         }
+
         [HttpGet("[controller]/[action]/{sNameFile}")]
         public async Task<IActionResult> Details(string sNameFile)
         {
@@ -66,15 +68,17 @@ namespace UIL.Controllers
             };
             return View(oSimmulationJeu);
         }
+
         public async Task<IActionResult> Download(string filename)
         {
             if (filename == null)
-                return Content("nom du fichier est vide");
+                return Content(Constants.NOM_FICHIER_EMPTY);
             MemoryStream oMemoryStream = await _oIGestionFichier_BLL.CreateStreamDownload(filename);
             if (oMemoryStream == null)
-                return Content("fichier non trouvé");
+                return Content(Constants.FICHIER_NON_TROUVE);
             return File(oMemoryStream, Constants.TEXT_XML, filename);
         }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

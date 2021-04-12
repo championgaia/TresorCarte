@@ -13,16 +13,16 @@ namespace BLL
 {
     public interface IGestionFichier_BLL
     {
-        Task<List<string>> Lecture(string sFileName);
+        Task<List<string>> Lecture(string sFilePath);
         Task<string> Ecriture(string sFileName, Jeu oCurrentJeu);
         Task<string> SaveFileUpload(IFormFile oIFormFile);
-        Task<(bool, string, List<string>)> FichierDonnesValide(string filePath);
+        Task<(bool, string, List<string>)> FichierDonnesValide(string sFileName, string sFullPathFile = null);
         Task<MemoryStream> CreateStreamDownload(string filename);
     }
     public class GestionFichier_BLL : IGestionFichier_BLL
     {
         /// <summary>
-        /// 
+        /// Save un fichier upload dans un dossier et retourner le nom de fichier sauvegardé
         /// </summary>
         /// <param name="oIFormFile"></param>
         /// <returns></returns>
@@ -39,16 +39,16 @@ namespace BLL
             return sFileNameGuid;
         }
         /// <summary>
-        /// 
+        /// Lecture un fichier et retourner son contenu
         /// </summary>
-        /// <param name="sFileName"></param>
+        /// <param name="sFilePath"></param>
         /// <returns></returns>
-        public async Task<List<string>> Lecture(string sFileName)
+        public async Task<List<string>> Lecture(string sFilePath)
         {
             List<string> oListDescriptionFichier = null;
-            if (!string.IsNullOrEmpty(sFileName))
+            if (!string.IsNullOrEmpty(sFilePath))
             {
-                FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.DOSSIER_TEMPS, sFileName));
+                FileInfo oFileInfo = new FileInfo(sFilePath);
                 if (oFileInfo.Exists)
                 {
                     oListDescriptionFichier = new List<string>();
@@ -76,7 +76,7 @@ namespace BLL
             return oListDescriptionFichier;
         }
         /// <summary>
-        /// 
+        /// Ecrit le fichier de sortie
         /// </summary>
         /// <param name="sFileName"></param>
         /// <param name="oCurrentJeu"></param>
@@ -126,27 +126,37 @@ namespace BLL
         /// </summary>
         /// <param name="sFileName"></param>
         /// <returns></returns>
-        public async Task<(bool, string, List<string>)> FichierDonnesValide(string sFileName)
+        public async Task<(bool, string, List<string>)> FichierDonnesValide(string sFileName, string sFullPathFile = null)
         {
             bool bEstValide = true;
             string sMessageErreur= string.Empty;
-            List<string> oListeDonnes = await Lecture(sFileName);
-            List<string> oListeDonnesCarte = oListeDonnes.FindAll(l => l.StartsWith(Constants.ABREVIATION_CARTE));
-            if (oListeDonnesCarte?.Count != 1)
+            List<string> oListeDonnes = await Lecture(string.IsNullOrEmpty(sFullPathFile) ? Path.Combine(Constants.DOSSIER_TEMPS, sFileName) : sFullPathFile);
+            if (oListeDonnes != null && oListeDonnes.Count > 0)
             {
-                bEstValide = false;
-                sMessageErreur += Constants.DONNES_CARTE_INVALIDE + Environment.NewLine;
+                List<string> oListeDonnesCarte = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_CARTE));
+                if (oListeDonnesCarte?.Count != 1)
+                {
+                    bEstValide = false;
+                    sMessageErreur += Constants.DONNES_CARTE_INVALIDE + Constants.SAUT_LIGNE_HTML;
+                }
+                List<string> oListeDonnesTresor = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_TRESOR));
+                if (oListeDonnesTresor?.Count == 0)
+                {
+                    bEstValide = false;
+                    sMessageErreur += Constants.DONNES_TRESOR_INVALIDE + Constants.SAUT_LIGNE_HTML;
+                }
+                List<string> oListeDonnesJoueur = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_JOUEUR));
+                if (oListeDonnesJoueur?.Count == 0)
+                {
+                    bEstValide = false;
+                    sMessageErreur += Constants.DONNES_JOUEUR_INVALIDE;
+                }
             }
-            List<string> oListeDonnesTresor = oListeDonnes.FindAll(l => l.StartsWith(Constants.ABREVIATION_TRESOR));
-            if (oListeDonnesTresor?.Count == 0)
+            else
             {
                 bEstValide = false;
-                sMessageErreur += Constants.DONNES_TRESOR_INVALIDE + Environment.NewLine;
-            }
-            List<string> oListeDonnesJoueur = oListeDonnes.FindAll(l => l.StartsWith(Constants.ABREVIATION_JOUEUR));
-            if (oListeDonnesJoueur?.Count == 0)
-            {
-                bEstValide = false;
+                sMessageErreur += Constants.DONNES_CARTE_INVALIDE + Constants.SAUT_LIGNE_HTML;
+                sMessageErreur += Constants.DONNES_TRESOR_INVALIDE + Constants.SAUT_LIGNE_HTML;
                 sMessageErreur += Constants.DONNES_JOUEUR_INVALIDE;
             }
             return (bEstValide, sMessageErreur, oListeDonnes);

@@ -12,6 +12,7 @@ namespace BLL
     public interface IGestionCarte_BLL
     {
         Task<TresorCarte> CreateCarteTresor(List<string> oListDescriptionFichier);
+        Task<bool> GetValidePosition(TresorCarte oCarte, Position oProchainPrevuPosition);
     }
     public class GestionCarte_BLL : IGestionCarte_BLL
     {
@@ -22,7 +23,7 @@ namespace BLL
             _oIGestionDonnesValide_BLL = oIGestionDonnesValide_BLL;
         }
         /// <summary>
-        /// 
+        /// Créer l'ensemble des elements de la carte
         /// </summary>
         /// <param name="oListDescriptionFichier"></param>
         /// <returns></returns>
@@ -32,15 +33,18 @@ namespace BLL
             if (oListDescriptionFichier != null && oListDescriptionFichier.Count > 0)
             {
                 TresorCarte = await InitialiserCarte(oListDescriptionFichier.FirstOrDefault(o => o.StartsWith(Constants.ABREVIATION_CARTE)));
-                TresorCarte.ListeCase = await InitialiserCases();
-                await InitialiserCaseMontagne(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_MONTAGNE)));
-                await InitialiserCaseTresor(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_TRESOR)));
-                await InitialiserPositionJoueurs(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_JOUEUR)));
+                if (TresorCarte != null)
+                {
+                    TresorCarte.ListeCase = await InitialiserCases();
+                    await InitialiserCaseMontagne(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_MONTAGNE)));
+                    await InitialiserCaseTresor(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_TRESOR)));
+                    await InitialiserPositionJoueurs(oListDescriptionFichier.FindAll(o => o.StartsWith(Constants.ABREVIATION_JOUEUR)));
+                }
             }
             return TresorCarte;
         }
         /// <summary>
-        /// 
+        /// Générer la carte vide (sans case)
         /// </summary>
         /// <param name="sInfoCarte"></param>
         /// <returns></returns>
@@ -51,11 +55,15 @@ namespace BLL
             {
                 string[] oCarteDonnes = sInfoCarte.Split(Constants.SEPERATEUR);
                 TresorCarte = new TresorCarte(int.Parse(oCarteDonnes[1]), int.Parse(oCarteDonnes[2]));
+                if (TresorCarte.NombreCaseHauteur * TresorCarte.NombreCaseLargeur <= 0)
+                {
+                    TresorCarte = null;
+                }
             }
             return TresorCarte;
         }
         /// <summary>
-        /// 
+        /// Trouver et changer les case neutre en case de type trésor
         /// </summary>
         /// <param name="oListeInfoCaseTresor"></param>
         /// <returns></returns>
@@ -80,7 +88,7 @@ namespace BLL
             }
         }
         /// <summary>
-        /// 
+        /// Trouver et changer les case neutre en case de type montagne
         /// </summary>
         /// <param name="oListeCaseMontagne"></param>
         /// <returns></returns>
@@ -104,7 +112,7 @@ namespace BLL
             }
         }
         /// <summary>
-        /// 
+        /// Générer tous les cases sous forme type neutre, 0 trésor, non occupé
         /// </summary>
         /// <returns></returns>
         private async Task<List<CaseCarte>> InitialiserCases()
@@ -124,7 +132,7 @@ namespace BLL
             return TresorCarte?.ListeCase;
         }
         /// <summary>
-        /// 
+        /// Trouver et changer les cases non occupé en cases occupées par les joueurs
         /// </summary>
         /// <param name="oListInfoJoueur"></param>
         /// <returns></returns>
@@ -139,7 +147,7 @@ namespace BLL
             }
         }
         /// <summary>
-        /// 
+        /// Set une case occupée
         /// </summary>
         /// <param name="oInfoJoueur"></param>
         /// <returns></returns>
@@ -155,6 +163,22 @@ namespace BLL
                     oCaseOccupeParJoueur.EstOccupe = true;
                 }
             }
+        }
+        /// <summary>
+        /// Valider une position sur la carte
+        /// </summary>
+        /// <param name="oCarte"></param>
+        /// <param name="oProchainPrevuPosition"></param>
+        /// <returns></returns>
+        public async Task<bool> GetValidePosition(TresorCarte oCarte, Position oProchainPrevuPosition)
+        {
+            if (oProchainPrevuPosition.AxeHorizontal >= 0 && oProchainPrevuPosition.AxeHorizontal < oCarte.NombreCaseLargeur &&
+                oProchainPrevuPosition.AxeVertical >= 0 && oProchainPrevuPosition.AxeVertical < oCarte.NombreCaseHauteur)
+            {
+                CaseCarte oCaseCarte = oCarte.ListeCase.FirstOrDefault(c => c.CasePosition.CompareTo(oProchainPrevuPosition) == 1);
+                return !oCaseCarte.EstOccupe && oCaseCarte.Type != CaseType.Montagne;
+            }
+            return false;
         }
     }
 }

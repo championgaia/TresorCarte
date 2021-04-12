@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Common;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,7 @@ namespace BLL
 {
     public interface IGestionDerouleJeu_BLL
     {
-        Task InitiationJeu(List<string> oListDescriptionFichier);
         Task<string> ExecuterJeu(List<string> oListDescriptionFichier);
-        Task JouerUnTout(int iTour);
         Task<string> TerminerJeu();
     }
     public class GestionDerouleJeu_BLL : IGestionDerouleJeu_BLL
@@ -36,7 +35,7 @@ namespace BLL
         /// <returns></returns>
         public async Task<string> ExecuterJeu(List<string> oListDescriptionFichier)
         {
-            await InitiationJeu( oListDescriptionFichier);
+            await InitiationJeu(oListDescriptionFichier);
             if (CurrentJeu != null)
             {
                 for (int iTour = 1; iTour <= CurrentJeu.NombreDeplacementMax; iTour++)
@@ -48,11 +47,11 @@ namespace BLL
             return null;
         }
         /// <summary>
-        /// 
+        /// Initialiser le jeu (creation carte, les joueurs, les tours) 
         /// </summary>
         /// <param name="oListDescriptionFichier"></param>
         /// <returns></returns>
-        public async Task InitiationJeu(List<string> oListDescriptionFichier)
+        private async Task InitiationJeu(List<string> oListDescriptionFichier)
         {
             if (oListDescriptionFichier != null && oListDescriptionFichier.Count > 0)
             {
@@ -66,20 +65,20 @@ namespace BLL
 
         }
         /// <summary>
-        /// 
+        /// Joueur un tour des tous les joueurs
         /// </summary>
         /// <param name="iTour"></param>
         /// <returns></returns>
-        public async Task JouerUnTout(int iTour)
+        private async Task JouerUnTout(int iTour)
         {
             for (int iOrder = 1; iOrder <= CurrentJeu.Joueurs.Count; iOrder++)
             {
-                Joueur oCurentJoueur = CurrentJeu.Joueurs[iOrder - 1];
-                Position oAncientPosition = oCurentJoueur.JoueurPosition;
-                if (oCurentJoueur.SequenceMovement.Length >= iTour)
+                Joueur oCurrentJoueur = CurrentJeu.Joueurs[iOrder - 1];
+                Position oAncientPosition = oCurrentJoueur.JoueurPosition;
+                if (oCurrentJoueur.SequenceMovement.Length >= iTour)
                 {
-                    Position oNouveauPosition = await _oIDeplacerJoueur_BLL.GetNextPositionJoueur(oCurentJoueur, iTour);
-                    if (await GetValidePosition(CurrentJeu.Carte, oNouveauPosition) && oNouveauPosition.CompareTo(oAncientPosition) == 0)
+                    (Position oNouveauPosition, Orientation eNextOrientation)  = await _oIDeplacerJoueur_BLL.GetNextPositionJoueur(oCurrentJoueur, iTour);
+                    if (await _oIGestionCarte_BLL.GetValidePosition(CurrentJeu.Carte, oNouveauPosition) && oNouveauPosition.CompareTo(oAncientPosition) == 0)
                     {
                         //joueur a déplacé
                         //liberer le case de départ
@@ -89,40 +88,25 @@ namespace BLL
                         CaseCarte oNouveauCase = CurrentJeu.Carte.ListeCase.FirstOrDefault(c => oNouveauPosition.CompareTo(c.CasePosition) == 1);
                         oNouveauCase.EstOccupe = true;
                         //changer position du current joueur
-                        oCurentJoueur.JoueurPosition = oNouveauPosition;
+                        oCurrentJoueur.JoueurPosition = oNouveauPosition;
                         //recuperer trésor s'il y en a, et décompte le nombre de trésor
                         if (oNouveauCase.Type == CaseType.Tresor && oNouveauCase.NombreTresor > 0)
                         {
-                            oCurentJoueur.NombreTresorTrouve++;
+                            oCurrentJoueur.NombreTresorTrouve++;
                             oNouveauCase.NombreTresor--;
                         }
                     }
+                    oCurrentJoueur.CurrentOrientation = eNextOrientation;
                 }
             }
         }
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="oCarte"></param>
-        /// <param name="oProchainPrevuPosition"></param>
-        /// <returns></returns>
-        private async Task<bool> GetValidePosition(TresorCarte oCarte, Position oProchainPrevuPosition)
-        {
-            if (oProchainPrevuPosition.AxeHorizontal >= 0 && oProchainPrevuPosition.AxeHorizontal < oCarte.NombreCaseLargeur &&
-                oProchainPrevuPosition.AxeVertical >= 0 && oProchainPrevuPosition.AxeVertical < oCarte.NombreCaseHauteur)
-            {
-                CaseCarte oCaseCarte = oCarte.ListeCase.FirstOrDefault(c => c.CasePosition.CompareTo(oProchainPrevuPosition) == 1);
-                return !oCaseCarte.EstOccupe && oCaseCarte.Type != CaseType.Montagne;
-            }
-            return false;
-        }
-        /// <summary>
-        /// 
+        /// Termier le jeu en renvoyant le nom de fichier sortie
         /// </summary>
         /// <returns></returns>
         public async Task<string> TerminerJeu()
         {
-            return await _oIGestionFichier_BLL.Ecriture(Guid.NewGuid().ToString() + ".txt", CurrentJeu);
+            return await _oIGestionFichier_BLL.Ecriture(Guid.NewGuid().ToString() + Constants.EXTENSION_TEXTE, CurrentJeu);
         }
     }
 }
