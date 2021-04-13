@@ -13,6 +13,7 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
+[Nn]etcoreapp3.1
 [Rr]elease/
 [Rr]eleases/
 x64/
