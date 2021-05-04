@@ -52,15 +52,13 @@ namespace BLL
                 if (oFileInfo.Exists)
                 {
                     oListDescriptionFichier = new List<string>();
-                    using (StreamReader sr = oFileInfo.OpenText())
+                    using StreamReader sr = oFileInfo.OpenText();
+                    string sLigne = "";
+                    while ((sLigne = await sr.ReadLineAsync()) != null)
                     {
-                        string sLigne = "";
-                        while ((sLigne = await sr.ReadLineAsync()) != null)
+                        if (!sLigne.Contains(Constants.ABREVIATION_COMMENTAIRE))
                         {
-                            if (!sLigne.Contains(Constants.ABREVIATION_COMMENTAIRE))
-                            {
-                                oListDescriptionFichier.Add(sLigne);
-                            }
+                            oListDescriptionFichier.Add(sLigne);
                         }
                     }
                 }

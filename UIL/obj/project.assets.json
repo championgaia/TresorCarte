@@ -212,23 +212,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vhn\\.nuget\\packages\\": {},
+    "C:\\Users\\viet-hoang.nguyen\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PROJET\\TreasureHunt\\UIL\\UIL.csproj",
+      "projectUniqueName": "D:\\REPOGITVHN\\TresorCarte\\UIL\\UIL.csproj",
       "projectName": "UIL",
-      "projectPath": "C:\\PROJET\\TreasureHunt\\UIL\\UIL.csproj",
-      "packagesPath": "C:\\Users\\vhn\\.nuget\\packages\\",
-      "outputPath": "C:\\PROJET\\TreasureHunt\\UIL\\obj\\",
+      "projectPath": "D:\\REPOGITVHN\\TresorCarte\\UIL\\UIL.csproj",
+      "packagesPath": "C:\\Users\\viet-hoang.nguyen\\.nuget\\packages\\",
+      "outputPath": "D:\\REPOGITVHN\\TresorCarte\\UIL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\vhn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\viet-hoang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -241,14 +241,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\PROJET\\TreasureHunt\\BLL\\BLL.csproj": {
-              "projectPath": "C:\\PROJET\\TreasureHunt\\BLL\\BLL.csproj"
+            "D:\\REPOGITVHN\\TresorCarte\\BLL\\BLL.csproj": {
+              "projectPath": "D:\\REPOGITVHN\\TresorCarte\\BLL\\BLL.csproj"
             },
-            "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj": {
-              "projectPath": "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj"
+            "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj": {
+              "projectPath": "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj"
             },
-            "C:\\PROJET\\TreasureHunt\\Models\\Models.csproj": {
-              "projectPath": "C:\\PROJET\\TreasureHunt\\Models\\Models.csproj"
+            "D:\\REPOGITVHN\\TresorCarte\\Models\\Models.csproj": {
+              "projectPath": "D:\\REPOGITVHN\\TresorCarte\\Models\\Models.csproj"
             }
           }
         }
@@ -279,7 +279,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.408\\RuntimeIdentifierGraph.json"
       }
     }
   }

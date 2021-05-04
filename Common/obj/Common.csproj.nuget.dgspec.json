@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj": {}
+    "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj": {}
   },
   "projects": {
-    "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj": {
+    "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj",
+        "projectUniqueName": "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\PROJET\\TreasureHunt\\Common\\Common.csproj",
-        "packagesPath": "C:\\Users\\vhn\\.nuget\\packages\\",
-        "outputPath": "C:\\PROJET\\TreasureHunt\\Common\\obj\\",
+        "projectPath": "D:\\REPOGITVHN\\TresorCarte\\Common\\Common.csproj",
+        "packagesPath": "C:\\Users\\viet-hoang.nguyen\\.nuget\\packages\\",
+        "outputPath": "D:\\REPOGITVHN\\TresorCarte\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\vhn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\viet-hoang.nguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.407\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.408\\RuntimeIdentifierGraph.json"
         }
       }
     }

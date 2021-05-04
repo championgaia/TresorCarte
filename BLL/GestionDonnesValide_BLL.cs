@@ -29,29 +29,14 @@ namespace BLL
             if (!string.IsNullOrEmpty(sDonnes) && sDonnes.Contains(Constants.SEPERATEUR))
             {
                 string[] oArrayDonnes = sDonnes.Split(Constants.SEPERATEUR);
-                switch (eDonnesType)
+                bEstValide = eDonnesType switch
                 {
-                    case DonnesType.Carte:
-                        {
-                            bEstValide = oArrayDonnes.Length >= 3 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _);
-                            break;
-                        }
-                    case DonnesType.Montagne:
-                        {
-                            bEstValide = oArrayDonnes.Length >= 3 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _);
-                            break;
-                        }
-                    case DonnesType.Tresor:
-                        {
-                            bEstValide = oArrayDonnes.Length >= 4 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _) && int.TryParse(oArrayDonnes[3], out _);
-                            break;
-                        }
-                    case DonnesType.Joueur:
-                        {
-                            bEstValide = oArrayDonnes.Length >= 6 && int.TryParse(oArrayDonnes[2], out _) && int.TryParse(oArrayDonnes[3], out _);
-                            break;
-                        }
-                }
+                    DonnesType.Carte => oArrayDonnes.Length >= 3 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _),
+                    DonnesType.Montagne => oArrayDonnes.Length >= 3 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _),
+                    DonnesType.Tresor => oArrayDonnes.Length >= 4 && int.TryParse(oArrayDonnes[1], out _) && int.TryParse(oArrayDonnes[2], out _) && int.TryParse(oArrayDonnes[3], out _),
+                    DonnesType.Joueur => oArrayDonnes.Length >= 6 && int.TryParse(oArrayDonnes[2], out _) && int.TryParse(oArrayDonnes[3], out _),
+                    _ => false
+                };
             }
             return bEstValide;
         }

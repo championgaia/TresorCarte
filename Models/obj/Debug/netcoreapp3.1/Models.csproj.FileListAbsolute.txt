@@ -10,3 +10,15 @@ C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.csproj.CopyComplete
 C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.dll
 C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.pdb
 C:\PROJET\TreasureHunt\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
+D:\REPOGITVHN\TresorCarte\Models\bin\Debug\netcoreapp3.1\Models.deps.json
+D:\REPOGITVHN\TresorCarte\Models\bin\Debug\netcoreapp3.1\Models.dll
+D:\REPOGITVHN\TresorCarte\Models\bin\Debug\netcoreapp3.1\Models.pdb
+D:\REPOGITVHN\TresorCarte\Models\bin\Debug\netcoreapp3.1\Common.dll
+D:\REPOGITVHN\TresorCarte\Models\bin\Debug\netcoreapp3.1\Common.pdb
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.csprojAssemblyReference.cache
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfoInputs.cache
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.AssemblyInfo.cs
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.csproj.CoreCompileInputs.cache
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.csproj.CopyComplete
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.dll
+D:\REPOGITVHN\TresorCarte\Models\obj\Debug\netcoreapp3.1\Models.pdb
