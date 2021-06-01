@@ -202,7 +202,6 @@ D:\REPOGITVHN\TresorCarte\NoUnitTest\bin\Debug\netcoreapp3.1\Models.dll
 D:\REPOGITVHN\TresorCarte\NoUnitTest\bin\Debug\netcoreapp3.1\BLL.pdb
 D:\REPOGITVHN\TresorCarte\NoUnitTest\bin\Debug\netcoreapp3.1\Common.pdb
 D:\REPOGITVHN\TresorCarte\NoUnitTest\bin\Debug\netcoreapp3.1\Models.pdb
-D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.csprojAssemblyReference.cache
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.AssemblyInfoInputs.cache
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.AssemblyInfo.cs
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.csproj.CoreCompileInputs.cache
@@ -210,3 +209,4 @@ D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.csproj.C
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.dll
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.pdb
 D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.genruntimeconfig.cache
+D:\REPOGITVHN\TresorCarte\NoUnitTest\obj\Debug\netcoreapp3.1\NoUnitTest.csproj.AssemblyReference.cache

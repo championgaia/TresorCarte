@@ -14,10 +14,10 @@ namespace BLL
     }
     public class AdventurerManage_BLL : IAdventurerManage_BLL
     {
-        private readonly IDataValideManage_BLL _oIGestionDonnesValide_BLL;
-        public AdventurerManage_BLL(IDataValideManage_BLL oIGestionDonnesValide_BLL)
+        private readonly IDataValideManage_BLL _oIDataValideManage_BLL;
+        public AdventurerManage_BLL(IDataValideManage_BLL oIDataValideManage_BLL)
         {
-            _oIGestionDonnesValide_BLL = oIGestionDonnesValide_BLL;
+            _oIDataValideManage_BLL = oIDataValideManage_BLL;
         }
         /// <summary>
         /// Create Adventurers
@@ -54,7 +54,7 @@ namespace BLL
         private async Task<Adventurer> CreateAnAdventurerAsync(string oInfoAdventurer, int iIndexInfoAdventurer)
         {
             Adventurer oJoueur = null;
-            if (await _oIGestionDonnesValide_BLL.DataValideAsync(oInfoAdventurer, DataType.TreasureHunter))
+            if (await _oIDataValideManage_BLL.DataValideAsync(oInfoAdventurer, DataType.TreasureHunter))
             {
                 string[] oArrayAdventurerData = oInfoAdventurer.Split(Constants.SEPERATOR);
                 oJoueur = new Adventurer(oArrayAdventurerData[1], (Orientation)Enum.Parse(typeof(Orientation), oArrayAdventurerData[4]), oArrayAdventurerData[5].ToCharArray(), iIndexInfoAdventurer + 1)

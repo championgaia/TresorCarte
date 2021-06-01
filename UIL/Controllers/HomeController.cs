@@ -41,15 +41,15 @@ namespace UIL.Controllers
                 {
                     sNameFileCopie = await _oIFileManage_BLL.SaveFileUploadAsync(oGameSimmulation.MyFileUpload);
                 }
-                (bool bEstValide, string sMessageErreur, List<string> oListeDescriptionFichier) = await _oIFileManage_BLL.DataFileValideAsync(sNameFileCopie);
-                if (bEstValide)
+                (bool bIsValide, string sMessageError, List<string> oListDescriptionFile) = await _oIFileManage_BLL.DataFileValideAsync(sNameFileCopie);
+                if (bIsValide)
                 {
-                    string sNameFileResult = await _oIGameManage_BLL.RunGameAsync(oListeDescriptionFichier);
+                    string sNameFileResult = await _oIGameManage_BLL.RunGameAsync(oListDescriptionFile);
                     return RedirectToAction("Details", "Home", new { @sNameFile = sNameFileResult });
                 }
                 else
                 {
-                    ViewBag.ErrorMessage = sMessageErreur;
+                    ViewBag.ErrorMessage = sMessageError;
                     return View("Index", oGameSimmulation);
                 }
             }

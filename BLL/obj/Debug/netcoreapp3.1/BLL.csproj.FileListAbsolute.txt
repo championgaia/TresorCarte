@@ -19,10 +19,10 @@ D:\REPOGITVHN\TresorCarte\BLL\bin\Debug\netcoreapp3.1\Common.dll
 D:\REPOGITVHN\TresorCarte\BLL\bin\Debug\netcoreapp3.1\Models.dll
 D:\REPOGITVHN\TresorCarte\BLL\bin\Debug\netcoreapp3.1\Common.pdb
 D:\REPOGITVHN\TresorCarte\BLL\bin\Debug\netcoreapp3.1\Models.pdb
-D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.csprojAssemblyReference.cache
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfoInputs.cache
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.AssemblyInfo.cs
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CoreCompileInputs.cache
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyComplete
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.dll
 D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.pdb
+D:\REPOGITVHN\TresorCarte\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.AssemblyReference.cache

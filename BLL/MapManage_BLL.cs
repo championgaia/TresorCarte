@@ -17,10 +17,10 @@ namespace BLL
     public class MapManage_BLL : IMapManage_BLL
     {
         private TreasureMap CurrentMap { get; set; } = null;
-        private readonly IDataValideManage_BLL _oIGestionDonnesValide_BLL;
-        public MapManage_BLL(IDataValideManage_BLL oIGestionDonnesValide_BLL)
+        private readonly IDataValideManage_BLL _oIDataValideManage_BLL;
+        public MapManage_BLL(IDataValideManage_BLL oIDataValideManage_BLL)
         {
-            _oIGestionDonnesValide_BLL = oIGestionDonnesValide_BLL;
+            _oIDataValideManage_BLL = oIDataValideManage_BLL;
         }
         /// <summary>
         /// Create a map
@@ -51,7 +51,7 @@ namespace BLL
         private async Task<TreasureMap> InitializeMapAsync(string sInfoMap)
         {
             CurrentMap = null;
-            if (await _oIGestionDonnesValide_BLL.DataValideAsync(sInfoMap, DataType.Map))
+            if (await _oIDataValideManage_BLL.DataValideAsync(sInfoMap, DataType.Map))
             {
                 string[] oMapData = sInfoMap.Split(Constants.SEPERATOR);
                 CurrentMap = new TreasureMap(int.Parse(oMapData[1]), int.Parse(oMapData[2]));
@@ -73,7 +73,7 @@ namespace BLL
             {
                 foreach (var sInfoCaseTreasure in oListInfoCaseTreasure)
                 {
-                    if (await _oIGestionDonnesValide_BLL.DataValideAsync(sInfoCaseTreasure, DataType.Treasure))
+                    if (await _oIDataValideManage_BLL.DataValideAsync(sInfoCaseTreasure, DataType.Treasure))
                     {
                         string[] oCaseTreasureData = sInfoCaseTreasure.Split(Constants.SEPERATOR);
                         Position oTresurePosition = new Position(int.Parse(oCaseTreasureData[1]), int.Parse(oCaseTreasureData[2]));
@@ -98,7 +98,7 @@ namespace BLL
             {
                 foreach (var sInfoCaseMountain in oListeCaseMountain)
                 {
-                    if (await _oIGestionDonnesValide_BLL.DataValideAsync(sInfoCaseMountain, DataType.Mountain))
+                    if (await _oIDataValideManage_BLL.DataValideAsync(sInfoCaseMountain, DataType.Mountain))
                     {
                         string[] oCaseMountainData = sInfoCaseMountain.Split(Constants.SEPERATOR);
                         Position oMontagnePosition = new Position(int.Parse(oCaseMountainData[1]), int.Parse(oCaseMountainData[2]));
@@ -153,7 +153,7 @@ namespace BLL
         /// <returns></returns>
         private async Task SetCaseOccupiedAsync(string oInfoAdventurer)
         {
-            if (CurrentMap != null && await _oIGestionDonnesValide_BLL.DataValideAsync(oInfoAdventurer, DataType.TreasureHunter))
+            if (CurrentMap != null && await _oIDataValideManage_BLL.DataValideAsync(oInfoAdventurer, DataType.TreasureHunter))
             {
                 string[] oArrayDataAdventurer = oInfoAdventurer.Split(Constants.SEPERATOR);
                 CaseMap oCaseOccupiedVyAdventurer = CurrentMap.ListeCase

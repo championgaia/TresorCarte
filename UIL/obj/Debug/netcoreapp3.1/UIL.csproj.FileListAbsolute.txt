@@ -47,7 +47,6 @@ C:\PROJET\TreasureHunt\UIL\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServic
 C:\PROJET\TreasureHunt\UIL\obj\Debug\netcoreapp3.1\Razor\Views\Home\Details.cshtml.g.cs
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\appsettings.Development.json
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\appsettings.json
-D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\UIL.exe
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\UIL.deps.json
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\UIL.runtimeconfig.json
@@ -66,7 +65,6 @@ D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\Models.dll
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\BLL.pdb
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\Common.pdb
 D:\REPOGITVHN\TresorCarte\UIL\bin\Debug\netcoreapp3.1\Models.pdb
-D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.csprojAssemblyReference.cache
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.AssemblyInfoInputs.cache
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.AssemblyInfo.cs
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.csproj.CoreCompileInputs.cache
@@ -92,3 +90,5 @@ D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\staticwebassets\UIL.Static
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.dll
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.pdb
 D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.genruntimeconfig.cache
+D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\UIL.csproj.AssemblyReference.cache
+D:\REPOGITVHN\TresorCarte\UIL\obj\Debug\netcoreapp3.1\scopedcss\bundle\UIL.styles.css
