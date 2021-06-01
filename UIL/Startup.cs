@@ -25,12 +25,12 @@ namespace UIL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<IGestionDerouleJeu_BLL, GestionDerouleJeu_BLL>();
-            services.AddScoped<IGestionCarte_BLL, GestionCarte_BLL>();
-            services.AddScoped<IGestionDonnesValide_BLL, GestionDonnesValide_BLL>();
-            services.AddScoped<IGestionFichier_BLL, GestionFichier_BLL>();
-            services.AddScoped<IGestionJoueur_BLL, GestionJoueur_BLL>();
-            services.AddScoped<IDeplacerJoueur_BLL, DeplacerJoueur_BLL>();
+            services.AddScoped<IGameManage_BLL, GameManage_BLL>();
+            services.AddScoped<IMapManage_BLL, MapManage_BLL>();
+            services.AddScoped<IDataValideManage_BLL, DataValideManage_BLL>();
+            services.AddScoped<IFileManage_BLL, FileManage_BLL>();
+            services.AddScoped<IAdventurerManage_BLL, AdventurerManage_BLL>();
+            services.AddScoped<IDeplacementManage_BLL, DeplacementManage_BLL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

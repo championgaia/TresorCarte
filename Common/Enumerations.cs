@@ -13,45 +13,45 @@ namespace Common
             /// </summary>
             N = 0,
             /// <summary>
-            /// Sud
+            /// South
             /// </summary>
             S = 1,
             /// <summary>
-            /// Ouest
+            /// WEST
             /// </summary>
             O = 2,
             /// <summary>
-            /// Est
+            /// EAST
             /// </summary>
             E = 3
         }
         public enum Mouvement
         {
             /// <summary>
-            /// Avancer
+            /// Forward
             /// </summary>
             A = 0,
             /// <summary>
-            /// tourner à gauche
+            /// Turn left
             /// </summary>
             G = 1,
             /// <summary>
-            /// Tourner à droite
+            /// Turn right
             /// </summary>
             D = 2
         }
         public enum CaseType
         {
             Neutre = 0,
-            Montagne = 1,
-            Tresor = 2
+            Mountain = 1,
+            Treasure = 2
         }
-        public enum DonnesType
+        public enum DataType
         {
-            Carte = 0,
-            Montagne = 1,
-            Tresor = 2,
-            Joueur = 3
+            Map = 0,
+            Mountain = 1,
+            Treasure = 2,
+            TreasureHunter = 3
         }
     }
 }

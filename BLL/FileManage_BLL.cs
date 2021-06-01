@@ -11,25 +11,25 @@ using static Common.Enumerations;
 
 namespace BLL
 {
-    public interface IGestionFichier_BLL
+    public interface IFileManage_BLL
     {
-        Task<List<string>> Lecture(string sFilePath);
-        Task<string> Ecriture(string sFileName, Jeu oCurrentJeu);
-        Task<string> SaveFileUpload(IFormFile oIFormFile);
-        Task<(bool, string, List<string>)> FichierDonnesValide(string sFileName, string sFullPathFile = null);
-        Task<MemoryStream> CreateStreamDownload(string filename);
+        Task<List<string>> ReadAsync(string sFilePath);
+        Task<string> ExportAsync(string sFileName, Game oCurrentJeu);
+        Task<string> SaveFileUploadAsync(IFormFile oIFormFile);
+        Task<(bool, string, List<string>)> DataFileValideAsync(string sFileName, string sFullPathFile = null);
+        Task<MemoryStream> CreateStreamDownloadAsync(string filename);
     }
-    public class GestionFichier_BLL : IGestionFichier_BLL
+    public class FileManage_BLL : IFileManage_BLL
     {
         /// <summary>
-        /// Save un fichier upload dans un dossier et retourner le nom de fichier sauvegardé
+        /// Save a file upload in a folder and return name of file
         /// </summary>
         /// <param name="oIFormFile"></param>
         /// <returns></returns>
-        public async Task<string> SaveFileUpload(IFormFile oIFormFile)
+        public async Task<string> SaveFileUploadAsync(IFormFile oIFormFile)
         {
             string sFileNameGuid = Guid.NewGuid().ToString() + Path.GetExtension(oIFormFile.FileName);
-            DirectoryInfo oDirectoryInfo = new DirectoryInfo(Constants.DOSSIER_TEMPS);
+            DirectoryInfo oDirectoryInfo = new DirectoryInfo(Constants.FOLDER_TEMPS);
             oDirectoryInfo.Create();
             string sFullPathFile = Path.Combine(oDirectoryInfo.FullName, sFileNameGuid);
             using (var stream = new FileStream(sFullPathFile, FileMode.Create))
@@ -39,11 +39,11 @@ namespace BLL
             return sFileNameGuid;
         }
         /// <summary>
-        /// Lecture un fichier et retourner son contenu
+        /// Read the content of file
         /// </summary>
         /// <param name="sFilePath"></param>
         /// <returns></returns>
-        public async Task<List<string>> Lecture(string sFilePath)
+        public async Task<List<string>> ReadAsync(string sFilePath)
         {
             List<string> oListDescriptionFichier = null;
             if (!string.IsNullOrEmpty(sFilePath))
@@ -56,7 +56,7 @@ namespace BLL
                     string sLigne = "";
                     while ((sLigne = await sr.ReadLineAsync()) != null)
                     {
-                        if (!sLigne.Contains(Constants.ABREVIATION_COMMENTAIRE))
+                        if (!sLigne.Contains(Constants.ABREVIATION_COMMENT))
                         {
                             oListDescriptionFichier.Add(sLigne);
                         }
@@ -66,37 +66,37 @@ namespace BLL
             return oListDescriptionFichier;
         }
         /// <summary>
-        /// Ecrit le fichier de sortie
+        /// export file
         /// </summary>
         /// <param name="sFileName"></param>
         /// <param name="oCurrentJeu"></param>
         /// <returns></returns>
-        public async Task<string> Ecriture(string sFileName, Jeu oCurrentJeu)
+        public async Task<string> ExportAsync(string sFileName, Game oCurrentJeu)
         {
             if (!string.IsNullOrEmpty(sFileName) && oCurrentJeu != null)
             {
-                FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.DOSSIER_TEMPS, sFileName));
+                FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.FOLDER_TEMPS, sFileName));
                 if (oFileInfo.Exists)
                 {
                     oFileInfo.Delete();
                 }
                 List<string> oListeInfoSortie = new List<string>
                 {
-                    Constants.COMMENTAIRE_CARTE,
-                    oCurrentJeu.Carte.ToString(),
-                    Constants.COMMENTAIRE_MONTAGNE
+                    Constants.COMMENT_MAP,
+                    oCurrentJeu.Map.ToString(),
+                    Constants.COMMENT_MOUNTAIN
                 };
-                foreach (var oCaseMontage in oCurrentJeu.Carte.ListeCase.FindAll(c => c.Type == CaseType.Montagne))
+                foreach (var oCaseMontage in oCurrentJeu.Map.ListeCase.FindAll(c => c.Type == CaseType.Mountain))
                 {
                     oListeInfoSortie.Add(oCaseMontage.ToString());
                 }
-                oListeInfoSortie.Add(Constants.COMMENTAIRE_TRESOR);
-                foreach (var oCaseTresor in oCurrentJeu.Carte.ListeCase.FindAll(c => c.Type == CaseType.Tresor))
+                oListeInfoSortie.Add(Constants.COMMENT_TREASURE);
+                foreach (var oCaseTresor in oCurrentJeu.Map.ListeCase.FindAll(c => c.Type == CaseType.Treasure))
                 {
                     oListeInfoSortie.Add(oCaseTresor.ToString());
                 }
-                oListeInfoSortie.Add(Constants.COMMENTAIRE_JOUEUR);
-                foreach (var oJoueur in oCurrentJeu.Joueurs)
+                oListeInfoSortie.Add(Constants.COMMENT_AVENTURER);
+                foreach (var oJoueur in oCurrentJeu.Players)
                 {
                     oListeInfoSortie.Add(oJoueur.ToString());
                 }
@@ -116,49 +116,49 @@ namespace BLL
         /// </summary>
         /// <param name="sFileName"></param>
         /// <returns></returns>
-        public async Task<(bool, string, List<string>)> FichierDonnesValide(string sFileName, string sFullPathFile = null)
+        public async Task<(bool, string, List<string>)> DataFileValideAsync(string sFileName, string sFullPathFile = null)
         {
             bool bEstValide = true;
             string sMessageErreur= string.Empty;
-            List<string> oListeDonnes = await Lecture(string.IsNullOrEmpty(sFullPathFile) ? Path.Combine(Constants.DOSSIER_TEMPS, sFileName) : sFullPathFile);
+            List<string> oListeDonnes = await ReadAsync(string.IsNullOrEmpty(sFullPathFile) ? Path.Combine(Constants.FOLDER_TEMPS, sFileName) : sFullPathFile);
             if (oListeDonnes != null && oListeDonnes.Count > 0)
             {
-                List<string> oListeDonnesCarte = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_CARTE));
+                List<string> oListeDonnesCarte = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_MAP));
                 if (oListeDonnesCarte?.Count != 1)
                 {
                     bEstValide = false;
-                    sMessageErreur += Constants.DONNES_CARTE_INVALIDE + Constants.SAUT_LIGNE_HTML;
+                    sMessageErreur += Constants.DATA_MAP_INVALIDE + Constants.LINE_BREAK_HTML;
                 }
-                List<string> oListeDonnesTresor = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_TRESOR));
+                List<string> oListeDonnesTresor = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_TREASURE));
                 if (oListeDonnesTresor?.Count == 0)
                 {
                     bEstValide = false;
-                    sMessageErreur += Constants.DONNES_TRESOR_INVALIDE + Constants.SAUT_LIGNE_HTML;
+                    sMessageErreur += Constants.DATA_TREASURE_INVALIDE + Constants.LINE_BREAK_HTML;
                 }
-                List<string> oListeDonnesJoueur = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_JOUEUR));
+                List<string> oListeDonnesJoueur = oListeDonnes.FindAll(o => o.StartsWith(Constants.ABREVIATION_AVENTURER));
                 if (oListeDonnesJoueur?.Count == 0)
                 {
                     bEstValide = false;
-                    sMessageErreur += Constants.DONNES_JOUEUR_INVALIDE;
+                    sMessageErreur += Constants.DATA_AVENTURER_INVALIDE;
                 }
             }
             else
             {
                 bEstValide = false;
-                sMessageErreur += Constants.DONNES_CARTE_INVALIDE + Constants.SAUT_LIGNE_HTML;
-                sMessageErreur += Constants.DONNES_TRESOR_INVALIDE + Constants.SAUT_LIGNE_HTML;
-                sMessageErreur += Constants.DONNES_JOUEUR_INVALIDE;
+                sMessageErreur += Constants.DATA_MAP_INVALIDE + Constants.LINE_BREAK_HTML;
+                sMessageErreur += Constants.DATA_TREASURE_INVALIDE + Constants.LINE_BREAK_HTML;
+                sMessageErreur += Constants.DATA_AVENTURER_INVALIDE;
             }
             return (bEstValide, sMessageErreur, oListeDonnes);
         }
         /// <summary>
-        /// lecture le fichier en memoire
+        /// read a file in memory
         /// </summary>
         /// <param name="sFileName"></param>
         /// <returns></returns>
-        public async Task<MemoryStream> CreateStreamDownload(string sFileName)
+        public async Task<MemoryStream> CreateStreamDownloadAsync(string sFileName)
         {;
-            FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.DOSSIER_TEMPS, sFileName));
+            FileInfo oFileInfo = new FileInfo(Path.Combine(Constants.FOLDER_TEMPS, sFileName));
             if (!oFileInfo.Exists)
             {
                 return null;

@@ -6,34 +6,34 @@ namespace Common
 {
     public class Constants
     {
-        public const string SEPERATEUR = " - ";
-        public const char ABREVIATION_AVANCER = 'A';
-        public const char ABREVIATION_TOURNER_GAUCHE = 'G';
-        public const char ABREVIATION_TOURNER_DROITE = 'D';
+        public const string SEPERATOR = " - ";
+        public const char ABREVIATION_FORWARD = 'A';
+        public const char ABREVIATION_TURN_LEFT = 'G';
+        public const char ABREVIATION_TURN_RIGHT = 'D';
 
-        public const string ABREVIATION_CARTE = "C";
-        public const string ABREVIATION_MONTAGNE = "M";
-        public const string ABREVIATION_TRESOR = "T";
-        public const string ABREVIATION_JOUEUR = "A";
-        public const string ABREVIATION_COMMENTAIRE= @"#";
+        public const string ABREVIATION_MAP = "C";
+        public const string ABREVIATION_MOUNTAIN = "M";
+        public const string ABREVIATION_TREASURE = "T";
+        public const string ABREVIATION_AVENTURER= "A";
+        public const string ABREVIATION_COMMENT= @"#";
 
-        public const string COMMENTAIRE_CARTE = @"# {C comme Carte} - {Nb. de case en largeur} - {Nb. de case en hauteur}";
-        public const string COMMENTAIRE_MONTAGNE = @"# {M comme Montagne} - {Axe horizontal} - {Axe vertical}";
-        public const string COMMENTAIRE_TRESOR = @"# {T comme Trésor} - {Axe horizontal} - {Axe vertical} - {Nb. de trésors restants}";
-        public const string COMMENTAIRE_JOUEUR = @"# {A comme Aventurier} - {Nom de l’aventurier} - {Axe horizontal} - {Axe vertical} - {Orientation} - {Nb.trésors ramassés}";
+        public const string COMMENT_MAP = @"# {C comme Carte} - {Nb. de case en largeur} - {Nb. de case en hauteur}";
+        public const string COMMENT_MOUNTAIN = @"# {M comme Montagne} - {Axe horizontal} - {Axe vertical}";
+        public const string COMMENT_TREASURE = @"# {T comme Trésor} - {Axe horizontal} - {Axe vertical} - {Nb. de trésors restants}";
+        public const string COMMENT_AVENTURER = @"# {A comme Aventurier} - {Nom de l’aventurier} - {Axe horizontal} - {Axe vertical} - {Orientation} - {Nb.trésors ramassés}";
 
-        public const string DOSSIER_TEMPS = @"C:\TEMPS";
+        public const string FOLDER_TEMPS = @"C:\TEMPS";
 
-        public const string DONNES_CARTE_INVALIDE = @"- Le fichier ne contient aucune ligne Carte ";
-        public const string DONNES_TRESOR_INVALIDE = @"- Le fichier ne contient aucune ligne Trésor ";
-        public const string DONNES_JOUEUR_INVALIDE = @"- Le fichier ne contient aucune ligne Aventurier ";
+        public const string DATA_MAP_INVALIDE = @"- Le fichier ne contient aucune ligne Carte ";
+        public const string DATA_TREASURE_INVALIDE = @"- Le fichier ne contient aucune ligne Trésor ";
+        public const string DATA_AVENTURER_INVALIDE = @"- Le fichier ne contient aucune ligne Aventurier ";
 
         public const string TEXT_XML = "text/xml";
-        public const string EXTENSION_TEXTE = ".txt";
+        public const string EXTENSION_TEXT = ".txt";
 
-        public const string SAUT_LIGNE_HTML = @"<br />";
+        public const string LINE_BREAK_HTML = @"<br />";
 
-        public const string NOM_FICHIER_EMPTY = "nom du fichier est vide";
-        public const string FICHIER_NON_TROUVE = "fichier non trouvé";
+        public const string FILE_NAME_EMPTY = "nom du fichier est vide";
+        public const string FILE_NOT_FOUND = "fichier non trouvé";
     }
 }

@@ -10,15 +10,15 @@ namespace NoUnitTest
 {
     public class GestionDerouleJeu_Test : NoUnitTestBase
     {
-        private IGestionCarte_BLL _oIGestionCarte_BLL { get; set; }
-        private IGestionDerouleJeu_BLL _oIGestionDerouleJeu_BLL { get; set; }
-        private IGestionJoueur_BLL _oIGestionJoueur_BLL { get; set; }
+        private IMapManage_BLL _oIGestionCarte_BLL { get; set; }
+        private IGameManage_BLL _oIGestionDerouleJeu_BLL { get; set; }
+        private IAdventurerManage_BLL _oIGestionJoueur_BLL { get; set; }
         [SetUp]
         public void Setup()
         {
-            _oIGestionCarte_BLL = new GestionCarte_BLL(new GestionDonnesValide_BLL());
-            _oIGestionJoueur_BLL = new GestionJoueur_BLL(new GestionDonnesValide_BLL());
-            _oIGestionDerouleJeu_BLL = new GestionDerouleJeu_BLL(_oIGestionCarte_BLL, _oIGestionJoueur_BLL, new DeplacerJoueur_BLL(), new GestionFichier_BLL());
+            _oIGestionCarte_BLL = new MapManage_BLL(new DataValideManage_BLL());
+            _oIGestionJoueur_BLL = new AdventurerManage_BLL(new DataValideManage_BLL());
+            _oIGestionDerouleJeu_BLL = new GameManage_BLL(_oIGestionCarte_BLL, _oIGestionJoueur_BLL, new DeplacementManage_BLL(), new FileManage_BLL());
         }
         /// <summary>
         /// test ExecuteJeu retouner null
@@ -29,19 +29,19 @@ namespace NoUnitTest
         public async Task ExecuterJeu_TestNull()
         {
             //Test si oListDescriptionFichier = null;
-            Assert.IsNull(await _oIGestionDerouleJeu_BLL.ExecuterJeu(null));
+            Assert.IsNull(await _oIGestionDerouleJeu_BLL.RunGameAsync(null));
             //Test sioListDescriptionFichier est une collection vide
-            Assert.IsNull(await _oIGestionDerouleJeu_BLL.ExecuterJeu(new List<string>()));
+            Assert.IsNull(await _oIGestionDerouleJeu_BLL.RunGameAsync(new List<string>()));
             //Test si oCurrentJeu.NombreDeplacementMax = 0
-            Jeu oCurrentJeu = new Jeu
+            Game oCurrentJeu = new Game
             {
-                Carte = await _oIGestionCarte_BLL.CreateCarteTresor(Lists_Donnes_Valide),
-                Joueurs = await _oIGestionJoueur_BLL.CreateListeJoueur(Lists_Donnes_Valide)
+                Map = await _oIGestionCarte_BLL.CreateTreasureMapAsync(Lists_Donnes_Valide),
+                Players = await _oIGestionJoueur_BLL.CreateListeAdventurerAsync(Lists_Donnes_Valide)
             };
-            oCurrentJeu.NombreDeplacementMax = 0;
-            await _oIGestionDerouleJeu_BLL.SetJeu(oCurrentJeu);
-            Assert.IsNull(await _oIGestionDerouleJeu_BLL.ExecuterJeu(null));
-            await _oIGestionDerouleJeu_BLL.SetJeu(null);
+            oCurrentJeu.MaxTurn = 0;
+            await _oIGestionDerouleJeu_BLL.SetGameAsync(oCurrentJeu);
+            Assert.IsNull(await _oIGestionDerouleJeu_BLL.RunGameAsync(null));
+            await _oIGestionDerouleJeu_BLL.SetGameAsync(null);
         }
     }
 }

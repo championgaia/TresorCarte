@@ -16,66 +16,66 @@ namespace UIL.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IGestionFichier_BLL _oIGestionFichier_BLL;
-        private readonly IGestionDerouleJeu_BLL _oIGestionDerouleJeu_BLL;
-        public HomeController(ILogger<HomeController> logger, IGestionFichier_BLL oIGestionFichier_BLL, IGestionDerouleJeu_BLL oIGestionDerouleJeu_BLL)
+        private readonly IFileManage_BLL _oIFileManage_BLL;
+        private readonly IGameManage_BLL _oIGameManage_BLL;
+        public HomeController(ILogger<HomeController> logger, IFileManage_BLL oIFileManage_BLL, IGameManage_BLL oIGameManage_BLL)
         {
             _logger = logger;
-            _oIGestionFichier_BLL = oIGestionFichier_BLL;
-            _oIGestionDerouleJeu_BLL = oIGestionDerouleJeu_BLL;
+            _oIFileManage_BLL = oIFileManage_BLL;
+            _oIGameManage_BLL = oIGameManage_BLL;
         }
 
         public async Task<IActionResult> Index()
         {
-            SimmulationJeu oSimmulationJeu = new SimmulationJeu();
-            return View(oSimmulationJeu);
+            GameSimmulation oGameSimmulation = new GameSimmulation();
+            return View(oGameSimmulation);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(SimmulationJeu oSimmulationJeu)
+        public async Task<IActionResult> Post(GameSimmulation oGameSimmulation)
         {
             if (ModelState.IsValid)
             {
                 string sNameFileCopie = string.Empty;
-                if (oSimmulationJeu.MyFileUpload != null && !string.IsNullOrEmpty(oSimmulationJeu.MyFileUpload.FileName))
+                if (oGameSimmulation.MyFileUpload != null && !string.IsNullOrEmpty(oGameSimmulation.MyFileUpload.FileName))
                 {
-                    sNameFileCopie = await _oIGestionFichier_BLL.SaveFileUpload(oSimmulationJeu.MyFileUpload);
+                    sNameFileCopie = await _oIFileManage_BLL.SaveFileUploadAsync(oGameSimmulation.MyFileUpload);
                 }
-                (bool bEstValide, string sMessageErreur, List<string> oListeDescriptionFichier) = await _oIGestionFichier_BLL.FichierDonnesValide(sNameFileCopie);
+                (bool bEstValide, string sMessageErreur, List<string> oListeDescriptionFichier) = await _oIFileManage_BLL.DataFileValideAsync(sNameFileCopie);
                 if (bEstValide)
                 {
-                    string sNameFileResult = await _oIGestionDerouleJeu_BLL.ExecuterJeu(oListeDescriptionFichier);
+                    string sNameFileResult = await _oIGameManage_BLL.RunGameAsync(oListeDescriptionFichier);
                     return RedirectToAction("Details", "Home", new { @sNameFile = sNameFileResult });
                 }
                 else
                 {
                     ViewBag.ErrorMessage = sMessageErreur;
-                    return View("Index", oSimmulationJeu);
+                    return View("Index", oGameSimmulation);
                 }
             }
             else
             {
-                return View("Index", oSimmulationJeu);
+                return View("Index", oGameSimmulation);
             }
         }
 
         [HttpGet("[controller]/[action]/{sNameFile}")]
         public async Task<IActionResult> Details(string sNameFile)
         {
-            SimmulationJeu oSimmulationJeu = new SimmulationJeu
+            GameSimmulation oGameSimmulation = new GameSimmulation
             {
-                FichierResult = sNameFile
+                FileResult = sNameFile
             };
-            return View(oSimmulationJeu);
+            return View(oGameSimmulation);
         }
 
         public async Task<IActionResult> Download(string filename)
         {
             if (filename == null)
-                return Content(Constants.NOM_FICHIER_EMPTY);
-            MemoryStream oMemoryStream = await _oIGestionFichier_BLL.CreateStreamDownload(filename);
+                return Content(Constants.FILE_NAME_EMPTY);
+            MemoryStream oMemoryStream = await _oIFileManage_BLL.CreateStreamDownloadAsync(filename);
             if (oMemoryStream == null)
-                return Content(Constants.FICHIER_NON_TROUVE);
+                return Content(Constants.FILE_NOT_FOUND);
             return File(oMemoryStream, Constants.TEXT_XML, filename);
         }
 

@@ -12,11 +12,11 @@ namespace NoUnitTest
 {
     public class GestionFichier_Test : NoUnitTestBase
     {
-        private IGestionFichier_BLL _oIGestionFichier_BLL { get; set; }
+        private IFileManage_BLL _oIGestionFichier_BLL { get; set; }
         [SetUp]
         public void Setup()
         {
-            _oIGestionFichier_BLL = new GestionFichier_BLL();
+            _oIGestionFichier_BLL = new FileManage_BLL();
         }
         /// <summary
         /// Test Lecture return null
@@ -26,9 +26,9 @@ namespace NoUnitTest
         public async Task Lecture_TestNull()
         {
             //Test sFileName = null
-            Assert.IsNull(await _oIGestionFichier_BLL.Lecture(null));
+            Assert.IsNull(await _oIGestionFichier_BLL.ReadAsync(null));
             //Test sFileName est une chaine vide
-            Assert.IsNull(await _oIGestionFichier_BLL.Lecture(string.Empty));
+            Assert.IsNull(await _oIGestionFichier_BLL.ReadAsync(string.Empty));
         }
         /// <summary>
         /// Test validation donnees
@@ -39,32 +39,32 @@ namespace NoUnitTest
         {
             //Fichier vide
             (bool bEstValide, string sMessageErreur, List<string> oListeDescriptionFichier) = 
-                await _oIGestionFichier_BLL.FichierDonnesValide(FICHIER_VIDE, Path.Combine(REPERTOIRE_FICHIER, FICHIER_VIDE));
+                await _oIGestionFichier_BLL.DataFileValideAsync(FICHIER_VIDE, Path.Combine(REPERTOIRE_FICHIER, FICHIER_VIDE));
             Assert.IsFalse(bEstValide);
             Assert.IsEmpty(oListeDescriptionFichier);
-            Assert.IsTrue(sMessageErreur.Contains(Constants.DONNES_CARTE_INVALIDE) && sMessageErreur.Contains(Constants.DONNES_JOUEUR_INVALIDE) &&
-                sMessageErreur.Contains(Constants.DONNES_TRESOR_INVALIDE));
+            Assert.IsTrue(sMessageErreur.Contains(Constants.DATA_MAP_INVALIDE) && sMessageErreur.Contains(Constants.DATA_AVENTURER_INVALIDE) &&
+                sMessageErreur.Contains(Constants.DATA_TREASURE_INVALIDE));
             //fichier sans info carte
-            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.FichierDonnesValide(FICHIER_SANS_INFO_MAP, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_INFO_MAP));
+            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.DataFileValideAsync(FICHIER_SANS_INFO_MAP, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_INFO_MAP));
             Assert.IsFalse(bEstValide);
             Assert.IsNotEmpty(oListeDescriptionFichier);
-            Assert.IsTrue(sMessageErreur.Contains(Constants.DONNES_CARTE_INVALIDE));
+            Assert.IsTrue(sMessageErreur.Contains(Constants.DATA_MAP_INVALIDE));
             //fichier sans info trésor
-            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.FichierDonnesValide(FICHIER_SANS_TRESOR, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_TRESOR));
+            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.DataFileValideAsync(FICHIER_SANS_TRESOR, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_TRESOR));
             Assert.IsFalse(bEstValide);
             Assert.IsNotEmpty(oListeDescriptionFichier);
-            Assert.IsTrue(sMessageErreur.Contains(Constants.DONNES_TRESOR_INVALIDE));
+            Assert.IsTrue(sMessageErreur.Contains(Constants.DATA_TREASURE_INVALIDE));
             //fichier sans info joueur
-            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.FichierDonnesValide(FICHIER_SANS_JOUEUR, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_JOUEUR));
+            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.DataFileValideAsync(FICHIER_SANS_JOUEUR, Path.Combine(REPERTOIRE_FICHIER, FICHIER_SANS_JOUEUR));
             Assert.IsFalse(bEstValide);
             Assert.IsNotEmpty(oListeDescriptionFichier);
-            Assert.IsTrue(sMessageErreur.Contains(Constants.DONNES_JOUEUR_INVALIDE));
+            Assert.IsTrue(sMessageErreur.Contains(Constants.DATA_AVENTURER_INVALIDE));
             //test ok
-            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.FichierDonnesValide(FICHIER_OK, Path.Combine(REPERTOIRE_FICHIER, FICHIER_OK));
+            (bEstValide, sMessageErreur, oListeDescriptionFichier) = await _oIGestionFichier_BLL.DataFileValideAsync(FICHIER_OK, Path.Combine(REPERTOIRE_FICHIER, FICHIER_OK));
             Assert.IsTrue(bEstValide);
             Assert.IsNotEmpty(oListeDescriptionFichier);
-            Assert.IsTrue(!sMessageErreur.Contains(Constants.DONNES_CARTE_INVALIDE) && !sMessageErreur.Contains(Constants.DONNES_JOUEUR_INVALIDE) &&
-                !sMessageErreur.Contains(Constants.DONNES_TRESOR_INVALIDE));
+            Assert.IsTrue(!sMessageErreur.Contains(Constants.DATA_MAP_INVALIDE) && !sMessageErreur.Contains(Constants.DATA_AVENTURER_INVALIDE) &&
+                !sMessageErreur.Contains(Constants.DATA_TREASURE_INVALIDE));
         }
         /// <summary
         /// Test Ecriture return null
@@ -74,11 +74,11 @@ namespace NoUnitTest
         public async Task Ecriture_TestNull()
         {
             //Test sFileName = null
-            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(null, new Jeu()));
+            Assert.IsNull(await _oIGestionFichier_BLL.ExportAsync(null, new Game()));
             //Test sFileName est une chaine vide
-            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(string.Empty, new Jeu()));
+            Assert.IsNull(await _oIGestionFichier_BLL.ExportAsync(string.Empty, new Game()));
             //Test oCurrentJeu = null
-            Assert.IsNull(await _oIGestionFichier_BLL.Ecriture(Guid.NewGuid().ToString(), null));
+            Assert.IsNull(await _oIGestionFichier_BLL.ExportAsync(Guid.NewGuid().ToString(), null));
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿@model SimmulationJeu
+﻿@model GameSimmulation
 @{
     ViewData["Title"] = "Home Page";
 }
-@if (!string.IsNullOrEmpty(Model.FichierResult))
+@if (!string.IsNullOrEmpty(Model.FileResult))
 {
-<span>Nom du fichier resultat : @Model.FichierResult </span>
+<span>Nom du fichier resultat : @Model.FileResult </span>
     <br />
-    @Html.ActionLink("Télécharger", "Download", "Home", new { fileName = Model.FichierResult }, null)
+    @Html.ActionLink("Télécharger", "Download", "Home", new { fileName = Model.FileResult }, null)
 }

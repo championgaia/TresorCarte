@@ -6,20 +6,20 @@ using static Common.Enumerations;
 
 namespace Models
 {
-    public class Joueur
+    public class Adventurer
     {
         /// <summary>
         /// nom de joueur / aventurier
         /// </summary>
-        public string Nom { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// l'ordre du joueur dans un tour
         /// </summary>
-        public int OrderDeJouer { get; set; }
+        public int TurnOrder { get; set; }
         /// <summary>
         /// position sur la carte du joueur
         /// </summary>
-        public Position JoueurPosition { get; set; }
+        public Position AdventurerPosition { get; set; }
         /// <summary>
         /// l'orientation (N, S, O, E) du joueur
         /// </summary>
@@ -31,20 +31,20 @@ namespace Models
         /// <summary>
         /// nombre de trésor trouvé par joueur
         /// </summary>
-        public int NombreTresorTrouve { get; set; }
+        public int NumberTreasureFound { get; set; }
         /// <summary>
-        /// constructeur par déffaut
+        /// 
         /// </summary>
-        /// <param name="sNom"></param>
+        /// <param name="sName"></param>
         /// <param name="eOrientation"></param>
         /// <param name="oSequence"></param>
-        /// <param name="iOrderDeJouer"></param>
-        public Joueur(string sNom, Orientation eOrientation, char[] oSequence, int iOrderDeJouer)
+        /// <param name="iTurnOrder"></param>
+        public Adventurer(string sName, Orientation eOrientation, char[] oSequence, int iTurnOrder)
         {
-            Nom = sNom;
+            Name = sName;
             CurrentOrientation = eOrientation;
             SequenceMovement = oSequence;
-            OrderDeJouer = iOrderDeJouer;
+            TurnOrder = iTurnOrder;
         }
         /// <summary>
         /// 
@@ -52,8 +52,8 @@ namespace Models
         /// <returns></returns>
         public override string ToString()
         {
-            return Constants.ABREVIATION_JOUEUR + Constants.SEPERATEUR + Nom + Constants.SEPERATEUR + JoueurPosition?.AxeHorizontal + Constants.SEPERATEUR + JoueurPosition?.AxeVertical + 
-                Constants.SEPERATEUR + CurrentOrientation.ToString() + Constants.SEPERATEUR + NombreTresorTrouve;
+            return Constants.ABREVIATION_AVENTURER + Constants.SEPERATOR + Name + Constants.SEPERATOR + AdventurerPosition?.AxeHorizontal + Constants.SEPERATOR + AdventurerPosition?.AxeVertical + 
+                Constants.SEPERATOR + CurrentOrientation.ToString() + Constants.SEPERATOR + NumberTreasureFound;
         }
     }
 }
